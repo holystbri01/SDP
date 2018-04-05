@@ -23,13 +23,15 @@ class gridlayout(QWidget):
 
 		grid_layout = QGridLayout(self)
 	# first row of buttons
-		grid_layout.addWidget(button1, 0, 0, 1, 1, Qt.AlignCenter)
+		grid_layout.addWidget(button1, 0, 0, 2, 1, Qt.AlignCenter)
 		grid_layout.addWidget(button2, 0, 3, 2, 1, Qt.AlignCenter)
 		grid_layout.addWidget(button3, 0, 5, 2, 1, Qt.AlignCenter)
 	#first row of labels
-		grid_layout.addWidget(label1, 2, 0, 1, 1)
-		grid_layout.addWidget(label2, 2, 3, 1, 1)
-		grid_layout.addWidget(label3, 2, 5, 1, 1)
+		grid_layout.addWidget(label1, 2, 0, 1, 2)
+	#attempting to fix spacing issue (labels)
+#		grid_layout.setVerticalSpacing(5)
+		grid_layout.addWidget(label2, 2, 3, 1, 2)
+		grid_layout.addWidget(label3, 2, 5, 1, 2)
 	#second row of buttons
 		grid_layout.addWidget(button4, 4, 0, 2, 1, Qt.AlignCenter)
 		grid_layout.addWidget(button5, 4, 3, 2, 1, Qt.AlignCenter)
@@ -56,8 +58,13 @@ class ImageButton(QAbstractButton):
 class ImageLabel(QLabel):
 	def __init__(self,pixmap):
 		super(QLabel, self).__init__()
-		self.pixmap=pixmap
-		self.setPixmap(pixmap)
+		self.pixmap=pixmap.scaled(422,155)
+
+	def paintEvent(self, event):
+		painter = QPainter(self)
+		painter.drawPixmap(event.rect(), self.pixmap)
+	def sizeHint(self):
+		return self.pixmap.size()
 
 
 def main():
