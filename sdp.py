@@ -7,9 +7,9 @@ from PyQt4 import uic
 class MyMainWindow(QMainWindow):
 	def __init__(self):
 		super(QMainWindow, self).__init__()
-		self.setGeometry(100,100,1200,700)
+		self.setGeometry(QRect(100,100,1200,700))
 		self.setWindowIcon(QIcon("comcast logo.png"))
-		self.setStyleSheet("background-image: url(base background.png);")
+		self.setStyleSheet("background-image: url(base background.png) center no-repeat;")
 
 		self.mainwidget = QWidget()
 		self.vbox = QVBoxLayout(self.mainwidget)
@@ -22,7 +22,7 @@ class MyMainWindow(QMainWindow):
 		self.widge.setGeometry(QRect(0,0, 1200, 500))
 		self.vbox.addWidget(self.widge,0, Qt.AlignCenter)
 		#(left, top, bottom, right)
-		self.vbox.setContentsMargins(10,40,10,80)
+		self.vbox.setContentsMargins(10,40,10,225)
 
 		self.setCentralWidget(self.mainwidget)
 
@@ -47,6 +47,7 @@ class gridlayout(QWidget):
 
 #setup
 		qgrid = QGridLayout(self)
+		qgrid.setHorizontalSpacing(80)
 
 		qgrid.addWidget(button1, 0, 0, 2, 1, Qt.AlignCenter)
 		qgrid.addWidget(button2, 0, 3, 2, 1, Qt.AlignCenter)
@@ -64,10 +65,10 @@ class gridlayout(QWidget):
 		qgrid.addWidget(label5, 6, 3, 1, 1)
 		qgrid.addWidget(label6, 6, 5, 1, 1)
 
-class ImageLabel(QLabel):
+class ImageLabel(QAbstractButton):
 	def __init__(self, pixmap):
-		super(QLabel, self).__init__()
-		self.pixmap=pixmap.scaled(350,155)
+		super(QAbstractButton, self).__init__()
+		self.pixmap=pixmap.scaled(287,90)
 
 	def paintEvent(self, event):
 		painter = QPainter(self)
@@ -78,7 +79,7 @@ class ImageLabel(QLabel):
 class ImageButton(QAbstractButton):
 	def __init__(self, pixmap):
 		super(QAbstractButton, self).__init__()
-		self.pixmap=pixmap.scaled(202,200)
+		self.pixmap=pixmap.scaled(202,202)
 
 	def paintEvent(self, event):
 		painter = QPainter(self)
